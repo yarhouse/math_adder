@@ -1,14 +1,10 @@
 <?php
-// include 'function.inc.php';
+include 'functions.inc.php';
 include 'doctype.html';
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){	
 		
-		if (isset($_POST['number_over_20'])
-		&& htmlentities($_POST['number_over_20'])>19
-		&& isset($_POST['one2three'])
-		&& htmlentities($_POST['one2three'])>=1
-		&& htmlentities($_POST['one2three'])<=3){
+		if (all_pass($_POST)){
 
 			$k = htmlentities($_POST['number_over_20']);
 			$n = htmlentities($_POST['one2three']);
@@ -31,16 +27,13 @@ include 'doctype.html';
 				break;
 			}		
 		}
-		elseif (isset($_POST['number_over_20'])
-		&& htmlentities($_POST['number_over_20'])<20){
+		elseif (fail_20($_POST)){
 
 			$k = htmlentities($_POST['number_over_20']);
 			echo "You entered the number ".$k.".<br />";
 			echo "Please enter a number of 20 or higher.<br />";
 		}
-		elseif (isset($_POST['one2three'])
-		&& htmlentities($_POST['one2three'])<1
-		|| htmlentities($_POST['one2three'])>3){
+		elseif (fail_3($_POST)){
 
 			$n = htmlentities($_POST['one2three']);
 			echo "You entered the number ".$n.".<br />";
@@ -48,7 +41,6 @@ include 'doctype.html';
 		}
 	}
 	else{
-
 		include 'input.html';
 	}
 include 'footer.html'; 
